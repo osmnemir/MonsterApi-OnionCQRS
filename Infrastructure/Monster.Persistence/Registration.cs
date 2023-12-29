@@ -2,8 +2,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Monster.Application.Interfaces.Repositories;
+using Monster.Application.Interfaces.UnitOfWorks;
 using Monster.Persistence.Context;
 using Monster.Persistence.Repositories;
+using Monster.Persistence.UnitOfWorks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,7 @@ namespace Monster.Persistence
 
             services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
             services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
+            services.AddScoped<IUnitOfWorks,UnitOfWork>();
 
         }
     }

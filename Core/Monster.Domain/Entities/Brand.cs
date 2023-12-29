@@ -9,7 +9,7 @@ namespace Monster.Domain.Entities
 {
     public class Brand:EntityBase
     {
-        public required string Name { get; set; }
+        public  string Name { get; set; }
 
 
         public Brand()
