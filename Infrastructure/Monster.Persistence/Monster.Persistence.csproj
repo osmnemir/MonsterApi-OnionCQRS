@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Monster.Application\Monster.Application.csproj" />
     <ProjectReference Include="..\..\Core\Monster.Domain\Monster.Domain.csproj" />
   </ItemGroup>
 
