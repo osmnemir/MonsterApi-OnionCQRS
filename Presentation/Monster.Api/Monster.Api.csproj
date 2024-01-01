@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Monster.Mapper\Monster.Mapper.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Monster.Persistence\Monster.Persistence.csproj" />
   </ItemGroup>
 

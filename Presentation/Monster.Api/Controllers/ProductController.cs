@@ -20,7 +20,7 @@ namespace Monster.Api.Controllers
         public async Task<IActionResult> GetAllProducts()
         {
             var response = await mediator.Send(new GetAllProductsQueryRequest());
-            return Ok();
+            return Ok(response);
         }
     }
 }

@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monster.Infrastructure", "I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monster.Persistence", "Infrastructure\Monster.Persistence\Monster.Persistence.csproj", "{D3991A8F-A134-44C7-AAE4-29D06B6B75B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monster.Api", "Presentation\Monster.Api\Monster.Api.csproj", "{47051CB1-CB2B-408D-873B-A0E2DA1BB8C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monster.Api", "Presentation\Monster.Api\Monster.Api.csproj", "{47051CB1-CB2B-408D-873B-A0E2DA1BB8C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monster.Mapper", "Core\Monster.Mapper\Monster.Mapper.csproj", "{60AB044B-9633-44BB-9A9A-199EECFB0848}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{47051CB1-CB2B-408D-873B-A0E2DA1BB8C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47051CB1-CB2B-408D-873B-A0E2DA1BB8C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47051CB1-CB2B-408D-873B-A0E2DA1BB8C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60AB044B-9633-44BB-9A9A-199EECFB0848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60AB044B-9633-44BB-9A9A-199EECFB0848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60AB044B-9633-44BB-9A9A-199EECFB0848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60AB044B-9633-44BB-9A9A-199EECFB0848}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{A16512B3-CFE7-4936-9BED-5D2BDEA03FC2} = {36B1BF62-7B54-4A92-87CE-AEFAC072B6A6}
 		{D3991A8F-A134-44C7-AAE4-29D06B6B75B3} = {36B1BF62-7B54-4A92-87CE-AEFAC072B6A6}
 		{47051CB1-CB2B-408D-873B-A0E2DA1BB8C8} = {30D24515-25F4-4D1E-B0E0-3234548E6897}
+		{60AB044B-9633-44BB-9A9A-199EECFB0848} = {5DB50FE9-2C5F-4F7C-A076-D4091BB231D5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D29E8394-C33C-4F4F-AEA4-0E92C73D2434}
