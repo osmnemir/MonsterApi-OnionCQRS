@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Monster.Persistence.Context
 {
-    public class ApiDbContext:DbContext
+    public class ApiDbContext : DbContext
     {
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Detail> Details { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-       // public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,9 +24,9 @@ namespace Monster.Persistence.Context
         }
 
 
-        public ApiDbContext() 
+        public ApiDbContext()
         {
-            
+
         }
 
         public ApiDbContext(DbContextOptions options) : base(options)
