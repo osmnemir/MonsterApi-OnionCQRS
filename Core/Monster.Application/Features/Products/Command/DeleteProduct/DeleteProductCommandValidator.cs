@@ -8,28 +8,13 @@ using System.Threading.Tasks;
 
 namespace Monster.Application.Features.Products.Command.DeleteProduct
 {
-    public class CreateProductCommandValidator : AbstractValidator<CreateProductCommandRequest>
+    public class DeleteProductCommandValidator : AbstractValidator<DeleteProductCommandRequest>
     {
-        public CreateProductCommandValidator()
+        public DeleteProductCommandValidator()
         {
-            RuleFor(x => x.Title).NotEmpty()
-                .WithName("Başlık");
-
-            RuleFor(x => x.Description).NotEmpty()
-                .WithName("Açıklama");
-
-            RuleFor(x => x.BrandId).GreaterThan(0)
-                .WithName("Marka");
-
-            RuleFor(x => x.Price).GreaterThan(0)
-                .WithName("Fiyat");
-
-            RuleFor(x => x.Discount).GreaterThanOrEqualTo(0)
-                .WithName("İndirim Oranı");
-
-            RuleFor(x => x.CategoryIds).NotEmpty().Must(categories => categories.Any())
-                .WithName("Kategoriler");
-
+            RuleFor(x => x.Id)
+                .GreaterThan(0);
         }
     }
+
 }

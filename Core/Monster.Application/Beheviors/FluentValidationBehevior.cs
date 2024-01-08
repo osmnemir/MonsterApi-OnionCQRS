@@ -18,15 +18,18 @@ namespace Monster.Application.Beheviors
         }
         public Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
+            // Doğrulama bağlamını oluşturur.
             var context = new ValidationContext<TRequest>(request);
+            
             var failtures = validator
-                .Select(v => v.Validate(context))
-                .SelectMany(result => result.Errors)
-                .GroupBy(x => x.ErrorMessage)
-                .Select(x => x.First())
-                .Where(f => f != null)
-                .ToList();
+                .Select(v => v.Validate(context))  // Her bir validator için doğrulama yapılır.
+                .SelectMany(result => result.Errors)  // Doğrulama sonuçlarındaki hatalar birleştirilir.
+                .GroupBy(x => x.ErrorMessage)  // Aynı hata mesajına sahip hatalar gruplandırılır.
+                .Select(x => x.First())  // Her grup içindeki ilk hata seçilir.
+                .Where(f => f != null)  // Null olmayan hatalar seçilir.
+                .ToList();  // Seçilen hatalar bir liste haline getirilir.
 
+            // Doğrulama hataları varsa ValidationException fırlatır.
             if (failtures.Any())
                 throw new ValidationException(failtures);
 

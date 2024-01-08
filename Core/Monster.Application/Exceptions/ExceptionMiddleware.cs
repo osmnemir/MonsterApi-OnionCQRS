@@ -38,12 +38,17 @@ namespace Monster.Application.Exceptions
             // HTTP yanıtının durum kodunu ayarlar.
             httpContext.Response.StatusCode = statusCode;
 
+            // Eğer fırlatılan istisna türü ValidationException ise:
             if (exception.GetType() == typeof(ValidationException))
-            
+
+                // ValidationException'dan gelen hataları alarak bir ExceptionModel oluşturur ve JSON olarak yanıtı yazar.
                 return httpContext.Response.WriteAsync(new ExceptionModel
                 {
-                    Errors=((ValidationException)exception).Errors.Select(x=>x.ErrorMessage),
-                    StatusCode= StatusCodes.Status400BadRequest
+                    // ValidationException'dan gelen hataları alır ve sadece hata mesajlarını içeren bir koleksiyon oluşturur.
+                    Errors = ((ValidationException)exception).Errors.Select(x=>x.ErrorMessage),
+
+                    // HTTP yanıtının durum kodunu belirtir.
+                    StatusCode = StatusCodes.Status400BadRequest
                 }.ToString());
             
 
