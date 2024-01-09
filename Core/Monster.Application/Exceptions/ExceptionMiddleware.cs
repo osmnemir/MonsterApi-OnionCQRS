@@ -56,7 +56,6 @@ namespace Monster.Application.Exceptions
             List<string> errors = new()
             {
                 $"Hata: {exception.Message}",
-                $"Hata Açıklaması : {exception.InnerException?.ToString()}"
             };
 
             // JSON formatında bir hata modeli oluşturulur ve HTTP yanıtı olarak yazılır.

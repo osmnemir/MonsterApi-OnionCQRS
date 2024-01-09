@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Monster.Application.Features.Products.Rules;
 using Monster.Application.Interfaces.AutoMapper;
 using Monster.Application.Interfaces.UnitOfWorks;
 using Monster.Domain.Entities;
@@ -13,13 +14,19 @@ namespace Monster.Application.Features.Products.Command.CreateProduct
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest, Unit>
     {
         private readonly IUnitOfWorks unitOfWork;
+        private readonly ProductRules productRules;
 
-        public CreateProductCommandHandler(IUnitOfWorks unitOfWork)
+        public CreateProductCommandHandler(IUnitOfWorks unitOfWork, ProductRules productRules)
         {
             this.unitOfWork = unitOfWork;
+            this.productRules = productRules;
         }
         public async Task<Unit> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
         {
+            IList<Product> products = await unitOfWork.GetReadRepository<Product>().GetAllAsync();
+
+            await productRules.ProductTitleMustNotBeSame(products, request.Title);
+
             Product product = new(request.Title, request.Description, request.BrandId, request.Price, request.Discount);
 
             await unitOfWork.GetWriteRepository<Product>().AddAsync(product);
@@ -34,6 +41,7 @@ namespace Monster.Application.Features.Products.Command.CreateProduct
 
                 await unitOfWork.SaveAsync();
             }
+
             return Unit.Value;
         }
     }
