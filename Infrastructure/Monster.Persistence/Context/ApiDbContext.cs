@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Monster.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Monster.Persistence.Context
 {
-    public class ApiDbContext : DbContext
+    public class ApiDbContext : IdentityDbContext<User,Role,Guid>
     {
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Detail> Details { get; set; }
