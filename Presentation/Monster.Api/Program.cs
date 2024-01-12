@@ -1,5 +1,6 @@
 using Monster.Persistence;
 using Monster.Application;
+using Monster.Infrastructure;
 using Monster.Mapper;
 using Monster.Application.Exceptions;
 
@@ -19,6 +20,7 @@ builder.Configuration
     .AddJsonFile($"appsettings.{env.EnvironmentName}.json",optional:true);
 
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddCustomMapper();
 
