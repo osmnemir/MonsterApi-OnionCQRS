@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
+using Monster.Application.Bases;
 using Monster.Application.Interfaces.AutoMapper;
 using Monster.Application.Interfaces.UnitOfWorks;
 using Monster.Domain.Entities;
@@ -10,15 +12,11 @@ using System.Threading.Tasks;
 
 namespace Monster.Application.Features.Products.Command.UpdateProduct
 {
-    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommandRequest, Unit>
+    public class UpdateProductCommandHandler : BaseHandler, IRequestHandler<UpdateProductCommandRequest, Unit>
     {
-        private readonly IUnitOfWorks unitOfWork;
-        private readonly IMapper mapper;
 
-        public UpdateProductCommandHandler(IUnitOfWorks unitOfWork, IMapper mapper)
+        public UpdateProductCommandHandler(IMapper mapper, IUnitOfWorks unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
         {
-            this.unitOfWork = unitOfWork;
-            this.mapper = mapper;
         }
         public async Task<Unit> Handle(UpdateProductCommandRequest request, CancellationToken cancellationToken)
         {
@@ -38,6 +36,7 @@ namespace Monster.Application.Features.Products.Command.UpdateProduct
 
             await unitOfWork.GetWriteRepository<Product>().UpdateAsync(map);
             await unitOfWork.SaveAsync();
+
             return Unit.Value;
         }
     }

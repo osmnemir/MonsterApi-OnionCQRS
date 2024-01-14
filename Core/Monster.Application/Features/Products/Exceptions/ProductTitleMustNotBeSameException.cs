@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Monster.Application.Features.Products.Exceptions
 {
-    public class ProductTitleMustNotBeSameException:BaseExceptions
+    public class ProductTitleMustNotBeSameException:BaseException
     {
         public ProductTitleMustNotBeSameException() : base("Ürün başlığı aynı olamaz!!!") { }
         

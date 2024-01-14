@@ -59,15 +59,22 @@ namespace Monster.Infrastructure.Tokens
 
         public string GenerateRefreshToken()
         {
-
+            // 64 byte uzunluğunda rastgele bir sayı dizisi oluşturulur.
             var randomNumber = new byte[64];
+
+            // Rastgele sayıları oluşturan bir RandomNumberGenerator (rng) örneği oluşturulur.
             using var rng = RandomNumberGenerator.Create();
+
+            // Rastgele sayılarla randomNumber dizisi doldurulur.
             rng.GetBytes(randomNumber);
+
+            // Base64 formatına dönüştürülen rastgele sayılar, güvenli bir şekilde yenileme tokeni olarak kullanılabilir.
             return Convert.ToBase64String(randomNumber);
         }
 
         public ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token)
-        {
+        {    
+            // Token doğrulama parametreleri oluşturulur.
             TokenValidationParameters tokenValidationParamaters = new()
             {
                 ValidateIssuer = false,
@@ -77,8 +84,12 @@ namespace Monster.Infrastructure.Tokens
                 ValidateLifetime = false
             };
 
+            // JWT token işleyici oluşturulur.
             JwtSecurityTokenHandler tokenHandler = new();
+            // Token doğrulanır ve ilgili güvenlik tokeni alınır.
             var principal = tokenHandler.ValidateToken(token, tokenValidationParamaters, out SecurityToken securityToken);
+
+            // Güvenlik tokeni JWTSecurityToken türünde değilse veya algoritması HmacSha256 değilse bir hata fırlatılır.
             if (securityToken is not JwtSecurityToken jwtSecurityToken
                 || !jwtSecurityToken.Header.Alg
                 .Equals(SecurityAlgorithms.HmacSha256,

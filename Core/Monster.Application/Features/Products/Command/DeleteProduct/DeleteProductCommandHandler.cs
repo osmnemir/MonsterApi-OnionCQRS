@@ -1,4 +1,7 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
+using Monster.Application.Bases;
+using Monster.Application.Interfaces.AutoMapper;
 using Monster.Application.Interfaces.UnitOfWorks;
 using Monster.Domain.Entities;
 using System;
@@ -9,13 +12,10 @@ using System.Threading.Tasks;
 
 namespace Monster.Application.Features.Products.Command.DeleteProduct
 {
-    public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommandRequest,Unit>
+    public class DeleteProductCommandHandler : BaseHandler, IRequestHandler<DeleteProductCommandRequest, Unit>
     {
-        private readonly IUnitOfWorks unitOfWork;
-
-        public DeleteProductCommandHandler(IUnitOfWorks unitOfWork)
+        public DeleteProductCommandHandler(IMapper mapper, IUnitOfWorks unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
         {
-            this.unitOfWork = unitOfWork;
         }
         public async Task<Unit> Handle(DeleteProductCommandRequest request, CancellationToken cancellationToken)
         {
@@ -24,9 +24,8 @@ namespace Monster.Application.Features.Products.Command.DeleteProduct
 
             await unitOfWork.GetWriteRepository<Product>().UpdateAsync(product);
             await unitOfWork.SaveAsync();
+
             return Unit.Value;
         }
-        
-        
     }
 }
