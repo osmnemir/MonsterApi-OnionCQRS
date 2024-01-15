@@ -6,11 +6,6 @@ using Monster.Application.Features.Auth.Rules;
 using Monster.Application.Interfaces.AutoMapper;
 using Monster.Application.Interfaces.UnitOfWorks;
 using Monster.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monster.Application.Features.Auth.Command.Register
 {

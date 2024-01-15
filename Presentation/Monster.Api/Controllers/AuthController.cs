@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Monster.Application.Features.Auth.Command.Login;
 using Monster.Application.Features.Auth.Command.Register;
 
 namespace Monster.Api.Controllers
@@ -24,6 +25,16 @@ namespace Monster.Api.Controllers
 
             // Başarı durumunda HTTP 201 Created yanıtı döndür.
             return StatusCode(StatusCodes.Status201Created);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginCommandRequest request)
+        {
+            // CQRS komutunu tetikle ve işlemi başlat responseye ata
+            var response = await mediator.Send(request);
+
+            // Başarı durumunda HTTP 200  responsede döndür
+            return StatusCode(StatusCodes.Status200OK, response);
         }
     }
 }

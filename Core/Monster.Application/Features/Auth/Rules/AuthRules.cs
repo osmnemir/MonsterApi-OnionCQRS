@@ -19,5 +19,14 @@ namespace Monster.Application.Features.Auth.Rules
             // Kullanıcı yoksa, işlemi tamamlamış olarak Task.CompletedTask döndürülür.
             return Task.CompletedTask;
         }
+
+        public Task EmailOrPasswordShouldNotBeInvalid(User? user, bool checkPassword)
+        {
+            // Eğer kullanıcı null (yok) ise veya şifre kontrolü geçerli değilse istisna fırlatılır.
+            if (user is null || !checkPassword) throw new EmailOrPasswordShouldNotBeInvalidException();
+
+            // Kullanıcı var ve şifre kontrolü geçerliyse, işlem tamamlandı olarak bildirilir.
+            return Task.CompletedTask;
+        }
     }
 }
