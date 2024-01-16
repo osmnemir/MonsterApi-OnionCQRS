@@ -28,5 +28,11 @@ namespace Monster.Application.Features.Auth.Rules
             // Kullanıcı var ve şifre kontrolü geçerliyse, işlem tamamlandı olarak bildirilir.
             return Task.CompletedTask;
         }
+
+        public Task RefreshTokenShouldNotBeExpired(DateTime? expiryDate)
+        {
+            if (expiryDate <= DateTime.Now) throw new RefreshTokenShouldNotBeExpiredException();
+            return Task.CompletedTask;
+        }
     }
 }
