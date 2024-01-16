@@ -31,7 +31,16 @@ namespace Monster.Application.Features.Auth.Rules
 
         public Task RefreshTokenShouldNotBeExpired(DateTime? expiryDate)
         {
+            // Eğer yenileme tokeninin geçerlilik süresi dolmuşsa istisna fırlatılır.
             if (expiryDate <= DateTime.Now) throw new RefreshTokenShouldNotBeExpiredException();
+
+            // Yenileme tokeninin geçerlilik süresi dolmamışsa, işlem tamamlandı olarak bildirilir.
+            return Task.CompletedTask;
+        }
+
+        public Task EmailAddressShouldBeValid(User? user)
+        {
+            if (user is null) throw new EmailAddressShouldBeValidException();
             return Task.CompletedTask;
         }
     }

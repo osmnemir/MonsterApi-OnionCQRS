@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Monster.Application.Features.Auth.Command.Login;
 using Monster.Application.Features.Auth.Command.Register;
+using Monster.Application.Features.Auth.Command.Revoke;
+using Monster.Application.Features.Auth.Command.RevokeAll;
 
 namespace Monster.Api.Controllers
 {
@@ -35,6 +37,19 @@ namespace Monster.Api.Controllers
 
             // Başarı durumunda HTTP 200  responsede döndür
             return StatusCode(StatusCodes.Status200OK, response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Revoke(RevokeCommandRequest request)
+        {
+            await mediator.Send(request);
+            return StatusCode(StatusCodes.Status200OK);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RevokeAll()
+        {
+            await mediator.Send(new RevokeAllCommandRequest());
+            return StatusCode(StatusCodes.Status200OK);
         }
     }
 }
