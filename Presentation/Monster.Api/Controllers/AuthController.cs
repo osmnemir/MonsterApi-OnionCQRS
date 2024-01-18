@@ -41,6 +41,7 @@ namespace Monster.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Revoke(RevokeCommandRequest request)
         {
+            // RevokeCommandRequest tipindeki isteği mediator aracılığıyla işle
             await mediator.Send(request);
             return StatusCode(StatusCodes.Status200OK);
         }
@@ -48,6 +49,7 @@ namespace Monster.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> RevokeAll()
         {
+            // RevokeAllCommandRequest tipindeki isteği mediator aracılığıyla işle.
             await mediator.Send(new RevokeAllCommandRequest());
             return StatusCode(StatusCodes.Status200OK);
         }

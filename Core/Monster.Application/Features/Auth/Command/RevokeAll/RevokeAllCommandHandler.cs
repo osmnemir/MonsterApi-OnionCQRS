@@ -25,14 +25,17 @@ namespace Monster.Application.Features.Auth.Command.RevokeAll
 
         public async Task<Unit> Handle(RevokeAllCommandRequest request, CancellationToken cancellationToken)
         {
+            // Tüm kullanıcıları al ve liste oluştur.
             List<User> users = await userManager.Users.ToListAsync(cancellationToken);
 
+            // Her bir kullanıcının yenileme tokenini null olarak ayarla ve güncelle.
             foreach (User user in users)
             {
                 user.RefreshToken = null;
                 await userManager.UpdateAsync(user);
             }
 
+            // Başarılı bir şekilde tüm kullanıcıların yenileme tokenleri iptal edildiğini bildir.
             return Unit.Value;
         }
     }

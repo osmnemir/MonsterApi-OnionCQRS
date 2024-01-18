@@ -40,7 +40,9 @@ namespace Monster.Application.Features.Auth.Rules
 
         public Task EmailAddressShouldBeValid(User? user)
         {
+            // Eğer kullanıcı null  ise istisna fırlatılır.
             if (user is null) throw new EmailAddressShouldBeValidException();
+            // Eğer kullanıcı varsa, işlem tamamlandı olarak bildirilir.
             return Task.CompletedTask;
         }
     }

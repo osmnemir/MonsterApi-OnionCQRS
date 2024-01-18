@@ -32,6 +32,8 @@ namespace Monster.Persistence.Context
 
         public ApiDbContext(DbContextOptions options) : base(options)
         {
+            this.Database.SetCommandTimeout(999999);
+
         }
     }
 }

@@ -2,7 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Monster.Application.Interfaces.RedisCache;
 using Monster.Application.Interfaces.Tokens;
+using Monster.Infrastructure.RedisCache;
 using Monster.Infrastructure.Tokens;
  using System.Text;
 
@@ -17,6 +19,9 @@ namespace Monster.Infrastructure
 
             // ITokenService arayüzüne ve TokenService sınıfına bir servis ekler.
             services.AddTransient<ITokenService, TokenService>();
+
+            services.Configure<RedisCacheSettings>(configuration.GetSection("RedisCacheSettings"));
+            services.AddTransient<IRedisCacheService,RedisCacheService>();
 
             // Kimlik doğrulama yapılandırması eklenir.
             services.AddAuthentication(opt =>
@@ -43,6 +48,13 @@ namespace Monster.Infrastructure
                     ClockSkew = TimeSpan.Zero  // Saat kayması sıfır olarak ayarlanır.
                 };
             });
+
+            services.AddStackExchangeRedisCache(opt =>
+            {
+                opt.Configuration = configuration["RedisCacheSettings:ConnectionString"];
+                opt.InstanceName = configuration["RedisCacheSettings:InstanceName"];
+            });
+
 
         }
     }

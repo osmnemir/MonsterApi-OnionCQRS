@@ -28,12 +28,17 @@ namespace Monster.Application.Features.Auth.Command.Revoke
 
         public async Task<Unit> Handle(RevokeCommandRequest request, CancellationToken cancellationToken)
         {
+            // Kullanıcıyı e-posta adresine göre bul.
             User user = await userManager.FindByEmailAsync(request.Email);
+
+            // Kullanıcının e-posta adresinin geçerli olup olmadığını kontrol et.
             await authRules.EmailAddressShouldBeValid(user);
 
+            // Kullanıcının yenileme tokenini null olarak ayarla ve güncelle.
             user.RefreshToken = null;
             await userManager.UpdateAsync(user);
 
+            // Başarılı bir şekilde yenileme tokeni iptal edildiğini bildir.
             return Unit.Value;
         }
     }
